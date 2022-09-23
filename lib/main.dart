@@ -36,21 +36,24 @@ class HomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // Valor
-            GetBuilder<ValueController>(
+            GetX<ValueController>(
               init: valueController,
               builder: (ctrl) => Text('Valor definido: ${ctrl.definedValue}'),
             ),
 
             // Campo
-            TextField(
-              controller: textController,
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 32),
+              child: TextField(
+                controller: textController,
+              ),
             ),
 
             // Botão
-            GetBuilder<ValueController>(
+            GetX<ValueController>(
               init: valueController,
               builder: (ctrl) {
-                return ctrl.isLoading
+                return ctrl.isLoading.value
                     ? const CircularProgressIndicator()
                     : ElevatedButton(
                         onPressed: () {
