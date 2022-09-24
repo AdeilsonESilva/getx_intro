@@ -273,7 +273,7 @@ class HomePage3 extends StatelessWidget {
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) {
-                      return DataScreen();
+                      return const DataScreen();
                     },
                   ),
                 );
@@ -287,8 +287,8 @@ class HomePage3 extends StatelessWidget {
   }
 }
 
-class DataScreen extends StatelessWidget {
-  DataScreen({
+class DataScreen extends GetView<UserController> {
+  const DataScreen({
     Key? key,
   }) : super(key: key);
 
@@ -296,8 +296,6 @@ class DataScreen extends StatelessWidget {
         fontSize: 20,
         fontWeight: FontWeight.w700,
       );
-
-  final userController = Get.find<UserController>();
 
   @override
   Widget build(BuildContext context) {
@@ -312,15 +310,19 @@ class DataScreen extends StatelessWidget {
             // Apresentação do nome
             Obx(
               () => Text(
-                'Nome: ${userController.user.value.name}',
+                'Nome: ${controller.user.value.name}',
                 style: commonStyle(),
               ),
             ),
 
+            GetBuilder<UserController>(builder: (ctrl) {
+              return Text('Nome: ${ctrl.user.value.name}');
+            }),
+
             // Apresentação da idade
             Obx(
               () => Text(
-                'idade: ${userController.user.value.age}',
+                'idade: ${controller.user.value.age}',
                 style: commonStyle(),
               ),
             ),
